@@ -9,5 +9,5 @@ import (
 func main() {
 
 	r := routes.CreateServer()
-	http.ListenAndServe(":3000", r)
+	http.ListenAndServe("172.168.10.243:3000", r)
 }

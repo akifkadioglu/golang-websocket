@@ -11,6 +11,9 @@ import (
 func CreateServer() *chi.Mux {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
+
+	go socket.Run()
+
 	r.Get("/", home.Home)
 	r.HandleFunc("/socket", socket.SocketHandler)
 	return r

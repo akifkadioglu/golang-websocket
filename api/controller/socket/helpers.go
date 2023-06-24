@@ -2,21 +2,49 @@ package socket
 
 import (
 	"log"
+	"sync"
 
 	"github.com/gorilla/websocket"
 )
 
-func reader(conn *websocket.Conn) {
+type Client struct {
+	conn *websocket.Conn
+	mu   sync.Mutex
+}
+
+var UPGRADER = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+}
+
+var (
+	clients    = make(map[*Client]bool)
+	broadcast  = make(chan []byte)
+	register   = make(chan *Client)
+	unregister = make(chan *Client)
+)
+
+func Run() {
 	for {
-		message, p, err := conn.ReadMessage()
-		if err != nil {
-			log.Println(err)
-			return
-		}
-		log.Println(string(p))
-		if err := conn.WriteMessage(message, p); err != nil {
-			log.Println(err)
-			return
+		select {
+		case client := <-register:
+			clients[client] = true
+		case client := <-unregister:
+			client.mu.Lock()
+			delete(clients, client)
+			client.mu.Unlock()
+
+		case message := <-broadcast:
+			for client := range clients {
+				client.mu.Lock()
+				err := client.conn.WriteMessage(websocket.TextMessage, message)
+				client.mu.Unlock()
+
+				if err != nil {
+					log.Printf("Error sending message to client: %v", err)
+					unregister <- client
+				}
+			}
 		}
 	}
 }

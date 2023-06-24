@@ -1,20 +1,37 @@
 package socket
 
 import (
+	"fmt"
 	"log"
 	"net/http"
-
-	"github.com/akifkadioglu/golang-websocket/utils"
 )
 
 func SocketHandler(w http.ResponseWriter, r *http.Request) {
-	utils.UPGRADER.CheckOrigin = func(r *http.Request) bool {
+	UPGRADER.CheckOrigin = func(r *http.Request) bool {
 		return true
 	}
-	conn, err := utils.UPGRADER.Upgrade(w, r, nil)
+	conn, err := UPGRADER.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	reader(conn)
+
+	client := &Client{
+		conn: conn,
+	}
+
+	register <- client
+
+	for {
+		_, message, err := conn.ReadMessage()
+		if err != nil {
+			log.Println("Error reading message from client:", err)
+			break
+		}
+		fmt.Println("Received message:", string(message))
+		broadcast <- message
+	}
+
+	unregister <- client
+
 }
