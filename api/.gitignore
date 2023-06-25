@@ -1,0 +1,5 @@
+#env
+.env
+
+#henüz bitmediğinden ve bu gece üşendiğimden ignore'ladım
+controller/auth/controller.go
