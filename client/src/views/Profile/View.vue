@@ -88,7 +88,7 @@ async function changeName() {
     },
     body: JSON.stringify({ name: user.value.name }),
   };
-  var s = await fetch("https://socket-nwnt.onrender.com/change-name", requestOptions)
+  await fetch("https://socket-nwnt.onrender.com/change-name", requestOptions)
     .then(async (result) => {
       const data = await result.json();
       alert(data.message);

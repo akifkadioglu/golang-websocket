@@ -13,7 +13,7 @@ import (
 func main() {
 	log.Println("*********************** STARTED ***********************")
 
-	env.InitEnv(env.Local)
+	env.InitEnv(env.Prod)
 	database.Connection()
 	utils.InitToken()
 	r := routes.CreateServer()
