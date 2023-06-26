@@ -57,5 +57,5 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	/* tokenla giriş yapıyorum */
 	w.Header().Add("Authorization", "Bearer "+tokenString)
-	http.Redirect(w, r, "https://akifkadioglu-chat.netlify.app/token/"+tokenString, http.StatusMovedPermanently)
+	http.Redirect(w, r, "https://talk-secretly.netlify.app/token/"+tokenString, http.StatusMovedPermanently)
 }
