@@ -60,7 +60,7 @@ async function checkAuth() {
     return;
   }
 
-  var s = await fetch("http://https://socket-nwnt.onrender.com/check", {
+  var s = await fetch("https://socket-nwnt.onrender.com/check", {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
@@ -75,7 +75,7 @@ async function checkAuth() {
 }
 
 function connectToSocket() {
-  ws.value = new WebSocket("ws://https://socket-nwnt.onrender.com/socket/" + route.params.name);
+  ws.value = new WebSocket("wss://socket-nwnt.onrender.com/socket/" + route.params.name);
 
   ws.value.onmessage = function (event) {
     messages.value.unshift(JSON.parse(event.data));
