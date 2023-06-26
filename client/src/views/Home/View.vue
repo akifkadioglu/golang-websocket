@@ -1,34 +1,30 @@
 <template>
   <div>
-    <Divider text="Groups" />
-    <ul class="list-none space-y-2">
-      <li
-        v-for="(item, index) in groups"
-        :key="index"
-        class="transition flex items-center space-x-3 hover:bg-gray-100 px-3 py-1 rounded-lg"
+    <Divider text="Home" />
+    <div class="flex space-x-10 justify-center">
+      <button
+      @click="chatWith()"
+        class="transition flex space-x-0.5 hover:bg-gray-100 px-3 py-1 rounded-lg"
       >
-        <button
-          @click="showUserImage(item.title, 'https://placehold.co/400x400')"
-        >
-          <img
-            class="w-10 h-10 rounded"
-            src="https://placehold.co/400"
-            alt="Default avatar"
-          />
-        </button>
-        <div class="cursor-pointer w-full text-start" @click="chatWith(item.slug)">
-          <dt class="font-bold text-lg">{{ item.title }}</dt>
-          <dd class="font-light text-sm">{{ item.description }}</dd>
-        </div>
-      </li>
-    </ul>
+        <mdicon name="message-outline" />
+        <span>Start Chat</span>
+      </button>
+      <button
+        class="transition flex space-x-0.5 hover:bg-gray-100 px-3 py-1 rounded-lg"
+      >
+        <mdicon name="account-outline" />
+        <span>Profile</span>
+      </button>
+    </div>
   </div>
 </template>
 <script>
 import Divider from "../../components/Divider.vue";
-
 export default {
   components: { Divider },
+  mounted() {
+    this.generateUUID();
+  },
   data() {
     return {
       groups: [
@@ -46,13 +42,20 @@ export default {
     };
   },
   methods: {
-    showUserImage(title, src) {
-      this.$store.state.imgDialog.title = title;
-      this.$store.state.imgDialog.src = src;
-      this.$store.state.imgDialog.isopen = true;
+    chatWith() {
+      this.$router.push({ name: "Chat", params: { name: this.generateUUID() } });
     },
-    chatWith(name) {
-      this.$router.push({ name: "Chat", params: { name: name } });
+    generateUUID() {
+      var timestamp = new Date().getTime();
+      const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+        /[xy]/g,
+        function (c) {
+          var r = (timestamp + Math.random() * 16) % 16 | 0;
+          timestamp = Math.floor(timestamp / 16);
+          return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+        }
+      );
+      return uuid;
     },
   },
 };

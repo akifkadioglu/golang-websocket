@@ -1,11 +1,21 @@
 <template>
-  <button
-    @click="$router.push({ name: 'Home' })"
-    class="flex space-x-3 items-center hover:underline"
-  >
-    <mdicon name="arrow-left" />
-    <span>Back to Groups</span>
-  </button>
+  <div class="flex justify-between">
+    <button
+      @click="$router.replace({ name: 'Home' })"
+      class="flex space-x-3 items-center hover:underline hover:bg-gray-100 px-3 py-1 rounded-lg"
+    >
+      <mdicon name="arrow-left" />
+      <span>Back to Home</span>
+    </button>
+    <button
+      @click="copyURL"
+      class="flex space-x-3 items-center hover:underline hover:bg-gray-100 px-3 py-1 rounded-lg"
+    >
+      <mdicon name="content-copy" />
+      <span>Copy the Chat</span>
+    </button>
+  </div>
+
   <div class="container m-5 mx-auto">
     <div class="md:flex md:items-center mb-6">
       <div class="flex w-full space-x-3">
@@ -99,5 +109,9 @@ function sendText() {
   var jsonMessage = JSON.stringify(message);
   ws.value.send(jsonMessage);
   text.value = "";
+}
+async function copyURL() {
+  await navigator.clipboard.writeText(window.location.href);
+  alert("Copied to clipboard");
 }
 </script>

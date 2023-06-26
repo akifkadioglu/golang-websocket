@@ -13,7 +13,6 @@ export const cryption = {
             router.replace("/login")
             return
         }
-
     },
-
+    
 }
