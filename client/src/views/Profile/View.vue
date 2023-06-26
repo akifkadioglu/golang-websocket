@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center font-bold text-2xl">
+  <div class="text-center font-bold text-2xl my-5">
     {{ user.email }}
   </div>
   <div class="flex space-x-5 items-center">
@@ -18,7 +18,7 @@
       <button
         v-if="!isLoading"
         type="button"
-        class="w-15 text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center"
+        class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center"
         @click="changeName"
       >
         <mdicon name="check" />
@@ -26,7 +26,7 @@
       <div v-else role="status">
         <svg
           aria-hidden="true"
-          class="inline w-8 h-8 mr-2 text-gray-200 animate-spin fill-gray-600"
+          class="inline w-9 h-9 mr-2 text-gray-200 animate-spin fill-gray-600"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
