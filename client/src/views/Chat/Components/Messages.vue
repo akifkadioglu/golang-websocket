@@ -8,12 +8,12 @@
       <button>
         <img
           class="w-10 h-10 rounded"
-          src="https://placehold.co/400"
+          :src="item.picture"
           alt="Default avatar"
         />
       </button>
       <div class="cursor-pointer w-full text-start">
-        <dt class="font-bold text-sm">{{ item.username }}</dt>
+        <dt class="font-bold text-sm">{{ item.name }}</dt>
         <dd class="font-thin">{{ item.text }}</dd>
       </div>
     </li>

@@ -40,6 +40,7 @@ import { cryption } from "./../../functions";
 /* data */
 const name = ref("");
 const text = ref("");
+const picture = ref("");
 const ws = ref();
 const messages = ref([]);
 const route = useRoute();
@@ -72,10 +73,13 @@ async function checkAuth() {
     router.replace("/login");
   }
   name.value = cryption.parseJwt(token).name;
+  picture.value = cryption.parseJwt(token).picture;
 }
 
 function connectToSocket() {
-  ws.value = new WebSocket("wss://socket-nwnt.onrender.com/socket/" + route.params.name);
+  ws.value = new WebSocket(
+    "wss://socket-nwnt.onrender.com/socket/" + route.params.name
+  );
 
   ws.value.onmessage = function (event) {
     messages.value.unshift(JSON.parse(event.data));
@@ -88,7 +92,8 @@ function sendText() {
     return;
   }
   var message = {
-    username: name.value,
+    picture: picture.value,
+    name: name.value,
     text: text.value.trim(),
   };
   var jsonMessage = JSON.stringify(message);
