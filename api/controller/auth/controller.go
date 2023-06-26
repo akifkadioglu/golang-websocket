@@ -48,7 +48,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	jwtclaims.ID = userClient.ID.String()
 	jwtclaims.Email = userClient.Email
 	jwtclaims.Name = userClient.Name
-	jwtclaims.Picture = *userClient.Picture
+	jwtclaims.Picture = userClient.Picture
 	jwtclaims.Time = time.Now().String()
 
 	/* token oluşturuyorum */

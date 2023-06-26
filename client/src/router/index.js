@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home/View.vue'
 import Chat from '../views/Chat/View.vue'
 import Login from '../views/Login/View.vue'
+import Profile from '../views/Profile/View.vue'
 
 import { routeNames } from './route_names'
 
@@ -29,6 +30,12 @@ const routes = [
         path: '/login',
         name: routeNames.LOGIN,
         component: Login,
+        meta: { layout: AuthLayout },
+    },
+    {
+        path: '/profile',
+        name: routeNames.PROFILE,
+        component: Profile,
         meta: { layout: AuthLayout },
     },
     {

@@ -3,13 +3,14 @@
     <Divider text="Home" />
     <div class="flex space-x-10 justify-center">
       <button
-      @click="chatWith()"
+        @click="chatWith()"
         class="transition flex space-x-0.5 hover:bg-gray-100 px-3 py-1 rounded-lg"
       >
         <mdicon name="message-outline" />
         <span>Start Chat</span>
       </button>
       <button
+        @click="$router.push({ name: 'Profile' })"
         class="transition flex space-x-0.5 hover:bg-gray-100 px-3 py-1 rounded-lg"
       >
         <mdicon name="account-outline" />
@@ -43,7 +44,10 @@ export default {
   },
   methods: {
     chatWith() {
-      this.$router.push({ name: "Chat", params: { name: this.generateUUID() } });
+      this.$router.push({
+        name: "Chat",
+        params: { name: this.generateUUID() },
+      });
     },
     generateUUID() {
       var timestamp = new Date().getTime();

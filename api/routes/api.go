@@ -6,6 +6,7 @@ import (
 	"github.com/akifkadioglu/golang-websocket/controller/auth"
 	"github.com/akifkadioglu/golang-websocket/controller/home"
 	"github.com/akifkadioglu/golang-websocket/controller/socket"
+	"github.com/akifkadioglu/golang-websocket/controller/user"
 	"github.com/akifkadioglu/golang-websocket/utils"
 
 	"github.com/dghubble/gologin/v2"
@@ -51,6 +52,7 @@ func CreateServer() *chi.Mux {
 		r.Use(jwtauth.Verifier(utils.JWTAuth()))
 		r.Use(jwtauth.Authenticator)
 		r.Get("/check", func(w http.ResponseWriter, r *http.Request) {})
+		r.Post("/change-name", user.ChangeName)
 	})
 
 	return r

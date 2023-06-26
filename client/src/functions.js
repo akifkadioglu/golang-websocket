@@ -14,5 +14,30 @@ export const cryption = {
             return
         }
     },
-    
+
+}
+
+export const auth = {
+    async check(token) {
+
+
+        if (!token) {
+            localStorage.clear();
+            router.replace("/login");
+            return;
+        }
+
+        var s = await fetch("https://socket-nwnt.onrender.com/check", {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                authorization: "Bearer " + token,
+            },
+        });
+
+        if (s.status != 200) {
+            localStorage.clear();
+            router.replace("/login");
+        }
+    }
 }

@@ -29,7 +29,7 @@
         />
         <button
           type="button"
-          class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500"
+          class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center"
           @click="sendText"
         >
           <mdicon name="arrow-right" />
@@ -44,8 +44,8 @@
 /* imports */
 import Messages from "./Components/Messages.vue";
 import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { cryption } from "./../../functions";
+import { useRoute } from "vue-router";
+import { cryption, auth } from "./../../functions";
 
 /* data */
 const name = ref("");
@@ -54,7 +54,6 @@ const picture = ref("");
 const ws = ref();
 const messages = ref([]);
 const route = useRoute();
-const router = useRouter();
 
 /* Mounted */
 onMounted(() => {
@@ -65,23 +64,7 @@ onMounted(() => {
 /* Methods */
 async function checkAuth() {
   var token = localStorage.getItem("token");
-  if (!token) {
-    localStorage.clear();
-    router.replace("/login");
-    return;
-  }
-
-  var s = await fetch("https://socket-nwnt.onrender.com/check", {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      authorization: "Bearer " + token,
-    },
-  });
-  if (s.status != 200) {
-    localStorage.clear();
-    router.replace("/login");
-  }
+  await auth.check(token);
   name.value = cryption.parseJwt(token).name;
   picture.value = cryption.parseJwt(token).picture;
 }
