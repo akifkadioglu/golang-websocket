@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/akifkadioglu/golang-websocket/database"
@@ -10,6 +11,7 @@ import (
 )
 
 func main() {
+	log.Println("*********************** STARTED ***********************")
 
 	env.InitEnv(env.Local)
 	database.Connection()
