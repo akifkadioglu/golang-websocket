@@ -14,8 +14,8 @@ import (
 func init() {
 	userFields := schema.User{}.Fields()
 	_ = userFields
-	// userDescUUID is the schema descriptor for uuid field.
-	userDescUUID := userFields[0].Descriptor()
-	// user.DefaultUUID holds the default value on creation for the uuid field.
-	user.DefaultUUID = userDescUUID.Default.(func() uuid.UUID)
+	// userDescID is the schema descriptor for id field.
+	userDescID := userFields[0].Descriptor()
+	// user.DefaultID holds the default value on creation for the id field.
+	user.DefaultID = userDescID.Default.(func() uuid.UUID)
 }

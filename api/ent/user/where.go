@@ -9,53 +9,48 @@ import (
 )
 
 // ID filters vertices based on their ID field.
-func ID(id int) predicate.User {
+func ID(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldID, id))
 }
 
 // IDEQ applies the EQ predicate on the ID field.
-func IDEQ(id int) predicate.User {
+func IDEQ(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldID, id))
 }
 
 // IDNEQ applies the NEQ predicate on the ID field.
-func IDNEQ(id int) predicate.User {
+func IDNEQ(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldNEQ(FieldID, id))
 }
 
 // IDIn applies the In predicate on the ID field.
-func IDIn(ids ...int) predicate.User {
+func IDIn(ids ...uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldIn(FieldID, ids...))
 }
 
 // IDNotIn applies the NotIn predicate on the ID field.
-func IDNotIn(ids ...int) predicate.User {
+func IDNotIn(ids ...uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldNotIn(FieldID, ids...))
 }
 
 // IDGT applies the GT predicate on the ID field.
-func IDGT(id int) predicate.User {
+func IDGT(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldGT(FieldID, id))
 }
 
 // IDGTE applies the GTE predicate on the ID field.
-func IDGTE(id int) predicate.User {
+func IDGTE(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldGTE(FieldID, id))
 }
 
 // IDLT applies the LT predicate on the ID field.
-func IDLT(id int) predicate.User {
+func IDLT(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldLT(FieldID, id))
 }
 
 // IDLTE applies the LTE predicate on the ID field.
-func IDLTE(id int) predicate.User {
+func IDLTE(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldLTE(FieldID, id))
-}
-
-// UUID applies equality check predicate on the "uuid" field. It's identical to UUIDEQ.
-func UUID(v uuid.UUID) predicate.User {
-	return predicate.User(sql.FieldEQ(FieldUUID, v))
 }
 
 // Name applies equality check predicate on the "name" field. It's identical to NameEQ.
@@ -63,49 +58,14 @@ func Name(v string) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldName, v))
 }
 
+// Picture applies equality check predicate on the "picture" field. It's identical to PictureEQ.
+func Picture(v string) predicate.User {
+	return predicate.User(sql.FieldEQ(FieldPicture, v))
+}
+
 // Email applies equality check predicate on the "email" field. It's identical to EmailEQ.
 func Email(v string) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldEmail, v))
-}
-
-// UUIDEQ applies the EQ predicate on the "uuid" field.
-func UUIDEQ(v uuid.UUID) predicate.User {
-	return predicate.User(sql.FieldEQ(FieldUUID, v))
-}
-
-// UUIDNEQ applies the NEQ predicate on the "uuid" field.
-func UUIDNEQ(v uuid.UUID) predicate.User {
-	return predicate.User(sql.FieldNEQ(FieldUUID, v))
-}
-
-// UUIDIn applies the In predicate on the "uuid" field.
-func UUIDIn(vs ...uuid.UUID) predicate.User {
-	return predicate.User(sql.FieldIn(FieldUUID, vs...))
-}
-
-// UUIDNotIn applies the NotIn predicate on the "uuid" field.
-func UUIDNotIn(vs ...uuid.UUID) predicate.User {
-	return predicate.User(sql.FieldNotIn(FieldUUID, vs...))
-}
-
-// UUIDGT applies the GT predicate on the "uuid" field.
-func UUIDGT(v uuid.UUID) predicate.User {
-	return predicate.User(sql.FieldGT(FieldUUID, v))
-}
-
-// UUIDGTE applies the GTE predicate on the "uuid" field.
-func UUIDGTE(v uuid.UUID) predicate.User {
-	return predicate.User(sql.FieldGTE(FieldUUID, v))
-}
-
-// UUIDLT applies the LT predicate on the "uuid" field.
-func UUIDLT(v uuid.UUID) predicate.User {
-	return predicate.User(sql.FieldLT(FieldUUID, v))
-}
-
-// UUIDLTE applies the LTE predicate on the "uuid" field.
-func UUIDLTE(v uuid.UUID) predicate.User {
-	return predicate.User(sql.FieldLTE(FieldUUID, v))
 }
 
 // NameEQ applies the EQ predicate on the "name" field.
@@ -171,6 +131,71 @@ func NameEqualFold(v string) predicate.User {
 // NameContainsFold applies the ContainsFold predicate on the "name" field.
 func NameContainsFold(v string) predicate.User {
 	return predicate.User(sql.FieldContainsFold(FieldName, v))
+}
+
+// PictureEQ applies the EQ predicate on the "picture" field.
+func PictureEQ(v string) predicate.User {
+	return predicate.User(sql.FieldEQ(FieldPicture, v))
+}
+
+// PictureNEQ applies the NEQ predicate on the "picture" field.
+func PictureNEQ(v string) predicate.User {
+	return predicate.User(sql.FieldNEQ(FieldPicture, v))
+}
+
+// PictureIn applies the In predicate on the "picture" field.
+func PictureIn(vs ...string) predicate.User {
+	return predicate.User(sql.FieldIn(FieldPicture, vs...))
+}
+
+// PictureNotIn applies the NotIn predicate on the "picture" field.
+func PictureNotIn(vs ...string) predicate.User {
+	return predicate.User(sql.FieldNotIn(FieldPicture, vs...))
+}
+
+// PictureGT applies the GT predicate on the "picture" field.
+func PictureGT(v string) predicate.User {
+	return predicate.User(sql.FieldGT(FieldPicture, v))
+}
+
+// PictureGTE applies the GTE predicate on the "picture" field.
+func PictureGTE(v string) predicate.User {
+	return predicate.User(sql.FieldGTE(FieldPicture, v))
+}
+
+// PictureLT applies the LT predicate on the "picture" field.
+func PictureLT(v string) predicate.User {
+	return predicate.User(sql.FieldLT(FieldPicture, v))
+}
+
+// PictureLTE applies the LTE predicate on the "picture" field.
+func PictureLTE(v string) predicate.User {
+	return predicate.User(sql.FieldLTE(FieldPicture, v))
+}
+
+// PictureContains applies the Contains predicate on the "picture" field.
+func PictureContains(v string) predicate.User {
+	return predicate.User(sql.FieldContains(FieldPicture, v))
+}
+
+// PictureHasPrefix applies the HasPrefix predicate on the "picture" field.
+func PictureHasPrefix(v string) predicate.User {
+	return predicate.User(sql.FieldHasPrefix(FieldPicture, v))
+}
+
+// PictureHasSuffix applies the HasSuffix predicate on the "picture" field.
+func PictureHasSuffix(v string) predicate.User {
+	return predicate.User(sql.FieldHasSuffix(FieldPicture, v))
+}
+
+// PictureEqualFold applies the EqualFold predicate on the "picture" field.
+func PictureEqualFold(v string) predicate.User {
+	return predicate.User(sql.FieldEqualFold(FieldPicture, v))
+}
+
+// PictureContainsFold applies the ContainsFold predicate on the "picture" field.
+func PictureContainsFold(v string) predicate.User {
+	return predicate.User(sql.FieldContainsFold(FieldPicture, v))
 }
 
 // EmailEQ applies the EQ predicate on the "email" field.

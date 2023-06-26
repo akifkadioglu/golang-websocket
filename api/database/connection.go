@@ -5,18 +5,17 @@ import (
 	"log"
 
 	"github.com/akifkadioglu/golang-websocket/ent"
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/akifkadioglu/golang-websocket/env"
+	_ "github.com/lib/pq"
 )
 
-func (d MySQL) main() {
-	var dns = env.Getenv(env.DB_USERNAME) + ":" + env.Getenv(env.DB_PASSWORD) + "@tcp(" + env.Getenv(env.DB_HOST) + ":" + env.Getenv(env.DB_PORT) + ")/" + env.Getenv(env.DB_DATABASE) + "?charset=utf8mb4&parseTime=True&loc=Local"
+func (d PostgreSQL) main() {
+	var dns = env.Getenv(env.DB_EXTERNAL_URL)
 
-	client, err = ent.Open("mysql", dns)
+	client, err = ent.Open("postgres", dns)
 	if err != nil {
-		log.Fatalf("failed opening connection to mysql: %v", err)
+		log.Fatalf("failed opening connection to postgres: %v", err)
 	}
-	//defer client.Close()
-
 	if err := client.Schema.Create(context.Background()); err != nil {
 		log.Fatalf("failed creating schema resources: %v", err)
 	}

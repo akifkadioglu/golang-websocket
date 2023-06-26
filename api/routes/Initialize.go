@@ -1,8 +1,10 @@
 package routes
 
 import (
+	"errors"
 	"os"
 
+	"github.com/go-chi/jwtauth/v5"
 	"golang.org/x/oauth2"
 	googleOAuth2 "golang.org/x/oauth2/google"
 )
@@ -20,8 +22,17 @@ func InitConfigs() *oauth2.Config {
 	return &oauth2.Config{
 		ClientID:     googleConfig.ClientID,
 		ClientSecret: googleConfig.ClientSecret,
-		RedirectURL:  "172.168.10.243:3000/google/callback",
+		RedirectURL:  "http://127.0.0.1:3000/google/callback",
 		Endpoint:     googleOAuth2.Endpoint,
 		Scopes:       []string{"profile", "email"},
 	}
+}
+
+func SetErrorMessages() {
+	jwtauth.ErrUnauthorized = errors.New("404 page not found")
+	jwtauth.ErrExpired = errors.New("404 page not found")
+	jwtauth.ErrNBFInvalid = errors.New("404 page not found")
+	jwtauth.ErrIATInvalid = errors.New("404 page not found")
+	jwtauth.ErrNoTokenFound = errors.New("404 page not found")
+	jwtauth.ErrAlgoInvalid = errors.New("404 page not found")
 }

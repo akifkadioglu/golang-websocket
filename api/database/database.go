@@ -11,13 +11,10 @@ type Idatabase interface {
 var client *ent.Client
 var err error
 
-type MySQL struct{}
-type SQLite struct{}
 type PostgreSQL struct{}
 
-func Init() {
-
-	var database MySQL
+func Connection() {
+	var database PostgreSQL
 	Idatabase.main(database)
 }
 func DBManager() *ent.Client {

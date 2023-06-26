@@ -12,10 +12,10 @@ const (
 	Label = "user"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
-	// FieldUUID holds the string denoting the uuid field in the database.
-	FieldUUID = "uuid"
 	// FieldName holds the string denoting the name field in the database.
 	FieldName = "name"
+	// FieldPicture holds the string denoting the picture field in the database.
+	FieldPicture = "picture"
 	// FieldEmail holds the string denoting the email field in the database.
 	FieldEmail = "email"
 	// Table holds the table name of the user in the database.
@@ -25,8 +25,8 @@ const (
 // Columns holds all SQL columns for user fields.
 var Columns = []string{
 	FieldID,
-	FieldUUID,
 	FieldName,
+	FieldPicture,
 	FieldEmail,
 }
 
@@ -41,8 +41,8 @@ func ValidColumn(column string) bool {
 }
 
 var (
-	// DefaultUUID holds the default value on creation for the "uuid" field.
-	DefaultUUID func() uuid.UUID
+	// DefaultID holds the default value on creation for the "id" field.
+	DefaultID func() uuid.UUID
 )
 
 // OrderOption defines the ordering options for the User queries.
@@ -53,14 +53,14 @@ func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
 }
 
-// ByUUID orders the results by the uuid field.
-func ByUUID(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldUUID, opts...).ToFunc()
-}
-
 // ByName orders the results by the name field.
 func ByName(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldName, opts...).ToFunc()
+}
+
+// ByPicture orders the results by the picture field.
+func ByPicture(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldPicture, opts...).ToFunc()
 }
 
 // ByEmail orders the results by the email field.
