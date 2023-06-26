@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     googleSignIn() {
-      window.open("http://127.0.0.1:3000/google/login","_self");
+      window.open("https://socket-nwnt.onrender.com/google/login","_self");
     },
   },
 };
