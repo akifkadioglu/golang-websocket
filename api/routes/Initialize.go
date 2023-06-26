@@ -22,7 +22,7 @@ func InitConfigs() *oauth2.Config {
 	return &oauth2.Config{
 		ClientID:     googleConfig.ClientID,
 		ClientSecret: googleConfig.ClientSecret,
-		RedirectURL:  "https://akifkadioglu-chat.netlify.app/google/callback",
+		RedirectURL:  "https://socket-nwnt.onrender.com/google/callback",
 		Endpoint:     googleOAuth2.Endpoint,
 		Scopes:       []string{"profile", "email"},
 	}
