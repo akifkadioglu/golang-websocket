@@ -15,5 +15,5 @@ func main() {
 	database.Connection()
 	utils.InitToken()
 	r := routes.CreateServer()
-	http.ListenAndServe("172.168.10.243:3000", r)
+	http.ListenAndServe(":10000", r)
 }
