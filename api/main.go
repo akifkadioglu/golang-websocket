@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	env.InitEnv(env.Prod)
+	env.InitEnv(env.Local)
 	database.Connection()
 	utils.InitToken()
 	r := routes.CreateServer()
