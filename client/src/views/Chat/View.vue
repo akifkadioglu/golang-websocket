@@ -9,10 +9,9 @@
     </button>
     <button
       @click="copyURL"
-      class="flex space-x-3 items-center hover:underline hover:bg-gray-100 px-3 py-1 rounded-lg"
+      class="flex space-x-3 items-center hover:bg-gray-100 px-3 py-1 rounded-lg"
     >
-      <mdicon name="content-copy" />
-      <span>Copy the Chat</span>
+      <mdicon name="share-variant-outline" />
     </button>
   </div>
 
@@ -46,6 +45,7 @@ import Messages from "./Components/Messages.vue";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { cryption, auth } from "./../../functions";
+import { useSnackbar } from "vue3-snackbar";
 
 /* data */
 const name = ref("");
@@ -54,6 +54,7 @@ const picture = ref("");
 const ws = ref();
 const messages = ref([]);
 const route = useRoute();
+const snackbar = useSnackbar();
 
 /* Mounted */
 onMounted(() => {
@@ -95,6 +96,9 @@ function sendText() {
 }
 async function copyURL() {
   await navigator.clipboard.writeText(window.location.href);
-  alert("Copied to clipboard");
+  snackbar.add({
+    type: "success",
+    text: "Link copied to clipboard!",
+  });
 }
 </script>

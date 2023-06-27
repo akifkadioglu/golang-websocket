@@ -12,6 +12,7 @@
     "mdi-vue": "^3.0.13",
     "vue": "^3.2.47",
     "vue-router": "^4.2.2",
+    "vue3-snackbar": "^2.1.7",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
