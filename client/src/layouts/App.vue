@@ -3,7 +3,7 @@
     <slot />
   </div>
   <IMG_Dialog />
-  <vue3-snackbar bottom left :duration="4000" />
+  <vue3-snackbar reverse bottom left :duration="4000" />
 </template>
 <script>
 import IMG_Dialog from "../components/IMG_Dialog.vue";
