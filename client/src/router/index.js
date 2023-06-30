@@ -10,6 +10,7 @@ import AppLayout from '../layouts/App.vue'
 import AuthLayout from '../layouts/Auth.vue'
 
 const routes = [
+    
     {
         path: '/',
         name: routeNames.HOME,
@@ -36,7 +37,7 @@ const routes = [
         path: '/profile',
         name: routeNames.PROFILE,
         component: Profile,
-        meta: { layout: AuthLayout },
+        meta: { layout: AppLayout },
     },
     {
         path: '/chat/:name',

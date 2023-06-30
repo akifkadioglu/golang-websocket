@@ -52,20 +52,25 @@
 </template>
 
 <script setup>
+/* imports */
 import { useRouter } from "vue-router";
 import { cryption, auth } from "./../../functions";
 import { ref, onMounted } from "vue";
+import { useSnackbar } from "vue3-snackbar";
 
+/* data */
 const router = useRouter();
 const user = ref({ picture: "", email: "", name: "" });
 const token = ref("");
 const isLoading = ref(false);
+const snackbar = useSnackbar();
 
 onMounted(() => {
   token.value = localStorage.getItem("token");
   confirmationsFromToken();
 });
 
+/* methods */
 async function confirmationsFromToken() {
   await auth.check(token.value);
   user.value.name = cryption.parseJwt(token.value).name;
@@ -91,12 +96,16 @@ async function changeName() {
   await fetch("https://socket-nwnt.onrender.com/change-name", requestOptions)
     .then(async (result) => {
       const data = await result.json();
-      alert(data.message);
+      snackbar.add({
+        type: "success",
+        text: data.message,
+      });
       localStorage.setItem("token", data.token);
     })
     .catch(async (err) => {
       console.log(err);
     });
+
   isLoading.value = false;
 }
 </script>
