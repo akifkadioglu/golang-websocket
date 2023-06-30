@@ -50,10 +50,9 @@
       </div>
     </div>
   </div>
-  <div v-show="isEmojiPickerOpen" class="container pr-8 fixed bottom-0 mx-auto">
+  <div v-show="isEmojiPickerOpen" class="container pr-8 fixed bottom-3 mx-auto">
     <EmojiPicker
       style="width: 100%"
-      :offset="9"
       display-recent
       :native="true"
       @select="onSelectEmoji"
